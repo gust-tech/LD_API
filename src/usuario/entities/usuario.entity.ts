@@ -9,28 +9,32 @@ import { Tema } from "../../tema/entities/tema.entity";
 
         @PrimaryGeneratedColumn()
         @ApiProperty()
-        id: number
-        
+        id: number;
+
         @IsNotEmpty()
-        @Column({length: 255, nullable: false})
+        @MaxLength(100)
+        @Column({ length: 100, nullable: false })
         @ApiProperty()
-        nome: string
+        nome: string;
 
         @IsEmail()
         @IsNotEmpty()
-        @Column({length: 255, nullable: false})
-        @ApiProperty()
-        usuario: string // email
+        @MaxLength(255)
+        @Column({ length: 255, nullable: false })
+        @ApiProperty({ example: "email@email.com" })
+        usuario: string; //E-mail
 
         @IsNotEmpty()
         @MinLength(8)
-        @Column({length: 255, nullable: false})
+        @Column({ length: 255, nullable: false })
         @ApiProperty()
-        senha: string
-
-        @Column({length: 5000})
+        senha: string;
+    
+        @IsNotEmpty()
+        @MaxLength(2000)
+        @Column({ length: 2000, nullable: false })
         @ApiProperty()
-        foto: string
+        foto: string;
 
         @ApiProperty({ type: () => Postagem})
         @OneToMany( () => Postagem, (postagem) => postagem.usuario)
