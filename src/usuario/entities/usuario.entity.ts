@@ -12,8 +12,7 @@ import { Tema } from "../../tema/entities/tema.entity";
         id: number;
 
         @IsNotEmpty()
-        @MaxLength(100)
-        @Column({ length: 100, nullable: false })
+        @Column({length: 255, nullable: false})
         @ApiProperty()
         nome: string;
 
