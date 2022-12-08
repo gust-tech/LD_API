@@ -51,5 +51,14 @@ export class TemaService{
             throw new HttpException('Tema não existe', HttpStatus.NOT_FOUND)
             return await this.temaRepository.save(tema)
         }
+    
+        async delete(id: number): Promise<DeleteResult>{
+            let buscarTema= await this.findById(id)
+            
+            if (!buscarTema)
+                throw new HttpException('Tema não encontrado', HttpStatus.NO_CONTENT)
+            
+            return await this.temaRepository.delete(id)
+        }
 
 }
