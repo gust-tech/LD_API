@@ -40,5 +40,12 @@ export class TemaCrontoller{
             update(@Body() tema: Tema): Promise<Tema>{
                 return this.temaService.update(tema)
     }
+    
+    
+    @Delete('/id')
+        @HttpCode(HttpStatus.NO_CONTENT)
+            delete(@Param('id', ParseIntPipe) id: number){
+                return this.temaService.delete(id)
+    }
 
 }
