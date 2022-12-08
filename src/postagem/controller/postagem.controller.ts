@@ -1,56 +1,56 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards,} from "@nestjs/common";
+import { HttpStatus } from "@nestjs/common/enums";
+import { ParseIntPipe } from "@nestjs/common/pipes";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger/dist";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { Postagem } from "../entities/postagem.entity";
 import { PostagemService } from "../service/postagem.service";
 
-@ApiTags('/Postagem')
+@ApiTags('Postagem')
 @UseGuards(JwtAuthGuard)
 @Controller('/postagens')
 @ApiBearerAuth()
-export class PostagemCrontoller{
-    constructor(private readonly PostagemService: PostagemService){}
+export class PostagemController {
+    constructor(private readonly PostagemService: PostagemService) { }
 
     @Get()
-        @HttpCode(HttpStatus.OK)
-             findAll(): Promise<Postagem[]> {
-                return this.PostagemService.findAll()
+    @HttpCode(HttpStatus.OK)
+    findAll(): Promise<Postagem[]> {
+        return this.PostagemService.findAll();
     }
+
 
     @Get('/:id')
-        @HttpCode(HttpStatus.OK)
-            findById(@Param('id', ParseIntPipe) id: number): Promise<Postagem> {
-                return this.PostagemService.findById(id)
+    @HttpCode(HttpStatus.OK)
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Postagem> {
+        return this.PostagemService.findById(id)
     }
 
-    @Get('/curtida/:curtida')
-        @HttpCode(HttpStatus.OK)
-            findByCurtida(@Param('curtida') curtida: string): Promise<Postagem[]>{
-                return this.PostagemService.findByCurtida(curtida)
+    @Get('/titulo/:titulo')
+    @HttpCode(HttpStatus.OK)
+    findByTitulo(@Param('titulo') titulo: string): Promise<Postagem[]> {
+        return this.PostagemService.findByTitulo(titulo)
     }
 
-    @Get('/n_compar/:n_compar')
-        @HttpCode(HttpStatus.OK)
-            findByCompar(@Param('n_compar') n_compar: string): Promise<Postagem[]>{
-                return this.PostagemService.findByCompar(n_compar)
-    }
-
-    @Get('/data/:data')
-        @HttpCode(HttpStatus.OK)
-            findByData(@Param('data') data: string): Promise<Postagem[]>{
-                return this.PostagemService.findByData(data)
-    }
 
     @Post()
-        @HttpCode(HttpStatus.CREATED)
-            create(@Body() postagem: Postagem): Promise<Postagem>{
-                return this.PostagemService.create(postagem)
+    @HttpCode(HttpStatus.CREATED)
+    create(@Body() postagem: Postagem): Promise<Postagem>{
+        return this.PostagemService.create(postagem)
     }
+
+
 
     @Put()
-        @HttpCode(HttpStatus.OK)
-            update(@Body() postagem: Postagem): Promise<Postagem>{
-                return this.PostagemService.update(postagem)
+    @HttpCode(HttpStatus.OK)
+    update(@Body() postagem: Postagem): Promise<Postagem>{
+        return this.PostagemService.update(postagem)
     }
 
+
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete(@Param('id', ParseIntPipe) id: number){
+        return this.PostagemService.delete(id)
+    }
 }

@@ -1,10 +1,13 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import { HttpStatus } from "@nestjs/common/enums";
+import { HttpException } from "@nestjs/common/exceptions";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ILike, Repository } from "typeorm";
+import { DeleteResult, ILike, Repository } from "typeorm";
 import { Postagem } from "../entities/postagem.entity";
 
 @Injectable()
-export class PostagemService {
+export class PostagemService { 
+
     constructor(
         @InjectRepository(Postagem)
         private PostagemRepository: Repository<Postagem>
@@ -12,22 +15,25 @@ export class PostagemService {
 
     async findAll(): Promise<Postagem[]> {
         return await this.PostagemRepository.find({
-            relations:{
-                usuario: true
+            relations: {
+                tema: true,
+                usuario: true 
             }
         })
     }
 
-    async findById(id: number):Promise<Postagem> {
 
-            let postagem = await this.PostagemRepository.findOne({
-                where: { 
-                    id
-                },
-                relations:{
-                    usuario: true
-                }
-            })
+    async findById(id: number): Promise<Postagem> {
+
+        let postagem = await this.PostagemRepository.findOne({
+            where: {
+                id
+            },
+            relations: {
+                tema: true,
+                usuario: true
+            }
+        })  
 
         if (!postagem)
             throw new HttpException('Postagem não existe', HttpStatus.NOT_FOUND)
@@ -35,34 +41,13 @@ export class PostagemService {
         return postagem
     }
 
-    async findByCurtida(curtida: string): Promise<Postagem[]> {
+    async findByTitulo(titulo: string): Promise<Postagem[]> {
         return await this.PostagemRepository.find({
             where: {
-                curtida: ILike(`%${curtida}%`)
+                titulo: ILike(`%${titulo}%`)
             },
-            relations:{
-                usuario: true
-            }
-        })
-    }
-
-    async findByCompar(n_compar: string): Promise<Postagem[]> {
-        return await this.PostagemRepository.find({
-            where: {
-                n_compar: ILike(`%${n_compar}%`)
-            },
-            relations:{
-                usuario: true
-            }
-        })
-    }
-
-    async findByData(data: string): Promise<Postagem[]> {
-        return await this.PostagemRepository.find({
-            where: {
-                data: ILike(`%${data}%`)
-            },
-            relations:{
+            relations: {
+                tema: true,
                 usuario: true
             }
         })
@@ -72,13 +57,25 @@ export class PostagemService {
         return await this.PostagemRepository.save(postagem)
     }
 
-    async update(postagem: Postagem): Promise<Postagem>{
+    async update(postagem: Postagem): Promise<Postagem> {
         let buscarPostagem = await this.findById(postagem.id)
-    
+
         if(!buscarPostagem || !postagem.id)
-            throw new HttpException('A postagem não existe', HttpStatus.NOT_FOUND)
+            throw new HttpException('Postagem Não Existe', HttpStatus.NOT_FOUND)
 
             return await this.PostagemRepository.save(postagem)
     }
+
+
+    async delete(id: number): Promise<DeleteResult> {
+        let buscarPostagem = await this.findById(id)
+
+        if(!buscarPostagem)
+            throw new HttpException('Postagem não encontrada', HttpStatus.NOT_FOUND)
+
+        return await this.PostagemRepository.delete(id)
+    }
+    
+
 
 }
