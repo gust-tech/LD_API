@@ -25,7 +25,15 @@ export class TemaService{
             return tema
         }
         
-        async findByAssunto(assunto: string): Promise<Tema[]>{
+            async findByDescricao(descricao: string): Promise<Tema[]>{
+            return await this.temaRepository.find({
+                where: {
+                    descricao: ILike(`%${descricao}%`)
+                }
+            })
+        }    
+    
+            async findByAssunto(assunto: string): Promise<Tema[]>{
             return await this.temaRepository.find({
                 where: {
                     assunto: ILike(`%${assunto}%`)
@@ -33,13 +41,6 @@ export class TemaService{
             })
         }
         
-        async findByDescricao(descricao: string): Promise<Tema[]>{
-            return await this.temaRepository.find({
-                where: {
-                    descricao: ILike(`%${descricao}%`)
-                }
-            })
-        }
         
         async create(tema: Tema): Promise<Tema>{
             return await this.temaRepository.save(tema)
