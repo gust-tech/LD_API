@@ -13,12 +13,12 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
         @IsNotEmpty()
         @Column({length: 100, nullable: false})
         @ApiProperty()
-        assunto: string
+        descricao: string
 
         @IsNotEmpty()
         @Column({length: 100, nullable: false})
         @ApiProperty()
-        descricao: string
+        assunto: string
         
         @OneToMany(() => Postagem, (postagem) => postagem.tema)
         postagem: Postagem[]
