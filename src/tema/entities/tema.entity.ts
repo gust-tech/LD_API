@@ -13,7 +13,7 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
         @IsNotEmpty()
         @Column({length: 100, nullable: false})
         @ApiProperty()
-        titulo: string
+        assunto: string
 
         @IsNotEmpty()
         @Column({length: 100, nullable: false})
