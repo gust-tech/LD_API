@@ -23,10 +23,10 @@ export class TemaCrontoller{
                 return this.temaService.findById(id)
     }
 
-    @Get('/titulo/:titulo')
+    @Get('/assunto/:assunto')
         @HttpCode(HttpStatus.OK)
-            findByTitulo(@Param('titulo') titulo:string): Promise<Tema[]>{
-                return this.temaService.findByTitulo(titulo)
+            findByTitulo(@Param('assunto') assunto:string): Promise<Tema[]>{
+                return this.temaService.findByTitulo(assunto)
     }
 
     @Post()
