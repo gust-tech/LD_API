@@ -8,10 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Fórum Dev Girls')
-    .setDescription('Projeto do Fórum Dev Girls')
-    .setContact('Generation Brasil', 'www.genbr.com.br', 'gstvgeneration@gmail.com')
-    .setVersion('1.0')
+    .setTitle('Fórum Lady Debug')
+    .setDescription('Projeto do Fórum Lady Debug')
+    .setContact('Equipe 3 - Generation', 'http://github.com/Equipe03-Generation', 'forumdevgirls@gmail.com')
+    .setVersion('3.0')
     .addBearerAuth()
     .build()
     const document = SwaggerModule.createDocument(app, config)
