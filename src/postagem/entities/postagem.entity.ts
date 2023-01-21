@@ -34,14 +34,4 @@ export class Postagem {
         onDelete: "CASCADE"
     })
     usuario: Usuario
-
-
-
-
-
-
-}
-
-function MaxLenght() {
-    throw new Error("Function not implemented.");
 }
