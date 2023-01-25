@@ -11,7 +11,7 @@ export class Tema {
     id: number
 
     @IsNotEmpty()
-    @Column({length: 50, nullable: false})
+    @Column({length: 50, nullable:false})
     @ApiProperty()
     assunto: string
 
