@@ -42,4 +42,10 @@ export class UsuarioController {
     async update (@Body() usuario: Usuario): Promise<Usuario> {
         return this.usuarioService.update(usuario)
     }
+    
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete(@Param('id', ParseIntPipe) id: number) {
+        return this.usuarioService.delete(id)
+    }
 }
