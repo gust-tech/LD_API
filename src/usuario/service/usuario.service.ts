@@ -58,7 +58,7 @@ export class UsuarioService {
             return await this.usuarioRepository.save(usuario)
         }
 
-        throw new HttpException('O Usuario já está cadastrado', HttpStatus.BAD_REQUEST)
+        throw new HttpException('O usuário já está cadastrado', HttpStatus.BAD_REQUEST)
 
     }
 
@@ -67,12 +67,20 @@ export class UsuarioService {
         let buscarUsuario = await this.findByUsuario(usuario.usuario)
 
         if(!updateUsuario)
-        throw new HttpException('Usuario não existe', HttpStatus.NOT_FOUND)
+        throw new HttpException('Usuário não existe', HttpStatus.NOT_FOUND)
 
         if(buscarUsuario && buscarUsuario.id !== usuario.id)
-            throw new HttpException('usuario já cadastrado', HttpStatus.BAD_REQUEST)
+            throw new HttpException('Usuário já cadastrado', HttpStatus.BAD_REQUEST)
 
             usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
             return await this.usuarioRepository.save(usuario)
+    }
+    
+    async delete (id: number): Promise<DeleteResult> {
+        let buscarUsuario = await this.findById(id)
+ 
+        if (!buscarUsuario)
+        throw new HttpException ('Usuário não encontrado', HttpStatus.NOT_FOUND)
+        return await this.usuarioRepository.delete(id)
     }
 }
