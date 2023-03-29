@@ -35,7 +35,6 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         @JoinColumn({})
         tema: Tema
 
-
         @ApiProperty({ type: () => Usuario})
         @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
             onDelete: "CASCADE"
@@ -48,9 +47,4 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         })
         comentario: Comentario
 
-
     }
-
-    
-
-    
