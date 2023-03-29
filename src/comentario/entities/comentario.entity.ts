@@ -1,7 +1,7 @@
 import { Postagem } from 'src/postagem/entities/postagem.entity';
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, MaxLength } from "class-validator";
-import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany} from "typeorm";
+import { IsNotEmpty } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToMany} from "typeorm";
 import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity({name: "tb_comentarios"})
