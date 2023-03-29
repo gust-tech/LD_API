@@ -15,7 +15,7 @@ import { UsuarioModule } from './usuario/usuario.module';
   //   port: 3306,
   //   username: 'root',
   //   password: 'root',
-  //   database: 'db_forum',
+  //   database: 'db_ladydebug',
   //   entities: [Postagem, Tema, Usuario],
   //   synchronize: true
   //}),
