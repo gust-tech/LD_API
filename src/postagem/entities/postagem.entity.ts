@@ -23,6 +23,11 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         @ApiProperty()
         texto: string
 
+        @IsNotEmpty()
+        @Column({length: 1000, nullable: false})
+        @ApiProperty()
+        comentario: string
+
         @ApiProperty({ type: () => Tema})
         @ManyToOne(() => Tema, (tema) => tema.postagem, {
             onDelete: "CASCADE"
@@ -36,6 +41,14 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
             onDelete: "CASCADE"
         })
         usuario: Usuario
+        
+        @ApiProperty({ type: () => Comentario})
+        @ManyToOne(() => Comentario, (comentario) => comentario.postagem, {
+            onDelete: "CASCADE"
+        })
+        comentario: Comentario
+
+
     }
 
     
