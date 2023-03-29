@@ -2,7 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, MaxLength } from "class-validator";
 import { Tema } from "src/tema/entities/tema.entity";
 import { Usuario } from "src/usuario/entities/usuario.entity";
-import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
+import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany} from "typeorm";
+import { Comentario } from "../../comentario/entities/comentario.entity";
 
 @Entity({name: "tb_postagens"})
     export class Postagem{
@@ -23,11 +24,6 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         @ApiProperty()
         texto: string
 
-        @IsNotEmpty()
-        @Column({length: 1000, nullable: false})
-        @ApiProperty()
-        comentario: string
-
         @ApiProperty({ type: () => Tema})
         @ManyToOne(() => Tema, (tema) => tema.postagem, {
             onDelete: "CASCADE"
@@ -36,7 +32,7 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         tema: Tema
 
         @ApiProperty({ type: () => Usuario})
-        @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+        @OneToMany(() => Usuario, (usuario) => usuario.postagem, {
             onDelete: "CASCADE"
         })
         usuario: Usuario
