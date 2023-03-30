@@ -16,7 +16,8 @@ export class ComentarioService {
     async findAll(): Promise<Comentario[]> {
         return await this.ComentarioRepository.find({
             relations: {
-                
+                usuario: true,
+                postagem: true
             }
         })
     }
@@ -29,7 +30,8 @@ export class ComentarioService {
                 id
             },
             relations: {
-                
+                usuario: true,
+                postagem: true
             }
         })
 
@@ -45,7 +47,8 @@ export class ComentarioService {
                 usuario: ILike(`%${usuario}%`)
             },
             relations: {
-                
+                usuario: true,
+                postagem: true
             }
         })
     }
