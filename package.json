@@ -1,5 +1,5 @@
 {
-  "name": "dev_girls",
+  "name": "lady_debug",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "npm build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
