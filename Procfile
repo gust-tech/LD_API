@@ -1,1 +1,1 @@
-web: npm run start:pod
+web: npm run start:prod
