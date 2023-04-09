@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Fórum Lady Debug')
-    .setDescription('Projeto do Fórum Lady Debug')
+    .setTitle('Blog Lady Debug')
+    .setDescription('Projeto Integrador')
     .setContact('Equipe 3 - Generation', 'http://github.com/Equipe03-Generation', 'forumdevgirls@gmail.com')
     .setVersion('3.0')
     .addBearerAuth()
