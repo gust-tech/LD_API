@@ -29,6 +29,10 @@ export class Usuario {
 
     @Column({length: 5000, nullable: false})
     @ApiProperty()
+    linkedin: string
+
+    @Column({length: 5000, nullable: false})
+    @ApiProperty()
     foto: string
 
     @ApiProperty({ type: () => Postagem })
