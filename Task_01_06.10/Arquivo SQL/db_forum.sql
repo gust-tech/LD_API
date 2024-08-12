@@ -1,4 +1,4 @@
-/* 
+kkkkkkkkkkkkk/* 
 1- Criando o banco de dados:
 create database db_forum;
 
